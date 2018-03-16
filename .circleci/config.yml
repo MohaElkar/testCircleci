@@ -16,10 +16,6 @@ jobs:
 
     working_directory: ~/lpsil
 
-    database:
-      override:
-        - mysql -u ubuntu circle_test < my-database-setup.sql
-
     steps:
       - checkout
 
@@ -36,6 +32,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
+      database:
+           override:
+             - mysql -u ubuntu circle_test < my-database-setup.sql
+
       # run tests!
       - run: npm test
