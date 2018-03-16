@@ -16,6 +16,10 @@ jobs:
 
     working_directory: ~/lpsil
 
+    database:
+      override:
+        - mysql -u ubuntu circle_test < my-database-setup.sql
+
     steps:
       - checkout
 
