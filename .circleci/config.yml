@@ -8,18 +8,20 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:7.10
-      
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD=true
+          - MYSQL_ROOT_PASSWORD=ubuntu
+          - MYSQL_USER=ubuntu
+          - MYSQL_PASSWORD=ubuntu
+          - MYSQL_DATABASE=circle_test
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
-       - image: mysql:5.7
 
     working_directory: ~/lpsil
-
-     database:
-        override:
-          - mysql -u ubuntu circle_test < my-database-setup.sql
 
     steps:
       - checkout
